@@ -25,14 +25,13 @@
 ### **1. Local Development (Docker Compose)**
 1. Clone the repository:
    ```sh
-   git clone <repo-url>
-   cd <project-folder>
+   git clone https://github.com/matheus-vieira-aguilar/technical_challenge
    ```
 2. Start all services with Docker Compose:
    ```sh
    docker-compose up -d
    ```
-3. Access the API at `http://localhost:3000`.
+3. Access the API at `http://localhost:8080`.
 
 ### **2. Kubernetes Deployment (Production)**
 1. Deploy services to Kubernetes:
