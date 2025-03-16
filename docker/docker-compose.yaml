@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  api-layer:
+    build: ./api-layer
+    ports:
+      - "8080:3000"
+    depends_on:
+      - ingestion-service
+      - query-service
+    environment:
+      - NODE_ENV=production
+
+  ingestion-service:
+    build: ./ingestion-service
+    ports:
+      - "8081:3000"
+    depends_on:
+      - kafka
+    environment:
+      - NODE_ENV=production
+
+  query-service:
+    build: ./query-service
+    ports:
+      - "8082:3000"
+    depends_on:
+      - redis
+      - mongodb
+    environment:
+      - NODE_ENV=production
+
+  kafka:
+    image: bitnami/kafka:latest
+    environment:
+      - ALLOW_PLAINTEXT_LISTENER=yes
+    ports:
+      - "9092:9092"
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
